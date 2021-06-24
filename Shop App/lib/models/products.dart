@@ -38,9 +38,28 @@ class Products with ChangeNotifier {
     ),
   ];
 
+  var showFavoritesOnly = false;
+
   List<Product> get items {
+    // if (showFavoritesOnly) {
+    //   return _items.where((element) => element.isFavourite).toList();
+    // }
     return [..._items];
   }
+
+  List<Product> get favouriteItems {
+    return _items.where((element) => element.isFavourite).toList();
+  }
+
+  // void showFavorites() {
+  //   showFavoritesOnly = true;
+  //   notifyListeners();
+  // }
+
+  // void showAll() {
+  //   showFavoritesOnly = false;
+  //   notifyListeners();
+  // }
 
   Product findById(String id) {
     return _items.firstWhere((element) => element.id == id);
