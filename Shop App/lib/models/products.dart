@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-
+import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import '../models/product.dart';
-import '../widgets/products_grid.dart';
 
-class ProductsOverviewScreen extends StatelessWidget {
-  final List<Product> loadedProducts = [
+class Products with ChangeNotifier {
+  List<Product> _items = [
     Product(
       id: 'p1',
       title: 'Red Shirt',
@@ -38,13 +37,17 @@ class ProductsOverviewScreen extends StatelessWidget {
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
     ),
   ];
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('My Shop'),
-      ),
-      body: ProductsGrid(),
-    );
+
+  List<Product> get items {
+    return [..._items];
+  }
+
+  Product findById(String id) {
+    return _items.firstWhere((element) => element.id == id);
+  }
+
+  void _addProduct() {
+    // _items.add(value);
+    notifyListeners();
   }
 }
