@@ -52,4 +52,9 @@ class Cart with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void removeItem(String id) {
+    _items.removeWhere((key, value) => value.id == id);
+    notifyListeners();
+  }
 }
