@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/product.dart';
@@ -66,8 +66,16 @@ class Products with ChangeNotifier {
     return _items.firstWhere((element) => element.id == id);
   }
 
-  void _addProduct() {
-    // _items.add(value);
+  void addProduct(Product product) {
+    final newProduct = Product(
+      id: DateTime.now().toString(),
+      title: product.title,
+      description: product.description,
+      price: product.price,
+      imageUrl: product.imageUrl,
+      isFavourite: product.isFavourite,
+    );
+    _items.add(newProduct);
     notifyListeners();
   }
 }
