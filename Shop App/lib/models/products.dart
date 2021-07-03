@@ -67,10 +67,11 @@ class Products with ChangeNotifier {
     return _items.firstWhere((element) => element.id == id);
   }
 
-  void addProduct(Product product) {
+  Future<void> addProduct(Product product) {
+    //it will return a future, which we want in listeners to make use of .then() to show a loading indicator
     var url = Uri.parse(
         'https://learnflutter-38f47-default-rtdb.firebaseio.com/products.json');
-    http
+    return http
         .post(
       url,
       body: json.encode(
@@ -95,7 +96,9 @@ class Products with ChangeNotifier {
       );
       _items.add(newProduct);
       notifyListeners();
+      //cannot return function here
     });
+    //cannot return function here because it will return immediately
   }
 
   void updateProduct(String id, Product newProduct) {
