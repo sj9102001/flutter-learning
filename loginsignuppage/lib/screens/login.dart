@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../screens/signup.dart';
+
 class LoginPage extends StatefulWidget {
+  static const routeName = '/login-page';
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -159,6 +163,7 @@ class _LoginPageState extends State<LoginPage> {
               InkWell(
                 onTap: () {
                   print('Register.');
+                  Navigator.of(context).pushNamed(SignUpPage.routeName);
                 },
                 child: Text(
                   'Register.',
