@@ -97,6 +97,8 @@ class Products with ChangeNotifier {
       _items.add(newProduct);
       notifyListeners();
       //cannot return function here
+    }).catchError((error) {
+      throw error;
     });
     //cannot return function here because it will return immediately
   }
