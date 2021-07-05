@@ -10,7 +10,7 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context, listen: true);
-    final cart = Provider.of<Cart>(context);
+    final cart = Provider.of<Cart>(context, listen: true);
     return Consumer<Products>(
       builder: (ctx, previousProduct, _) => ClipRRect(
         borderRadius: BorderRadius.circular(10),
