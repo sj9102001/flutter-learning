@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-import '../constant.dart';
 import '../widgets/title_with_more_button.dart';
-import '../widgets/title_with_custom_underline.dart';
 import '../widgets/header_with_search_box.dart';
+import '../widgets/recommended_plants.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -15,10 +13,8 @@ class Body extends StatelessWidget {
       child: Column(
         children: <Widget>[
           HeaderWithSearchBox(),
-          TitleWithMoreButton(
-            text: 'More',
-            press: () {},
-          ),
+          TitleWithMoreButton(text: 'More', press: () {}),
+          RecommendedPlants()
         ],
       ),
     );
