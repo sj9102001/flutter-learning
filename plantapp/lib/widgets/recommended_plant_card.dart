@@ -21,9 +21,9 @@ class RecommendedPlantCard extends StatelessWidget {
       margin: EdgeInsets.only(
         left: kDefaultPadding,
         top: kDefaultPadding / 2,
-        bottom: kDefaultPadding * 2.5,
+        bottom: kDefaultPadding * 2,
       ),
-      width: size.width * 0.4,
+      width: size.width * 0.35,
       child: GestureDetector(
         child: Card(
           elevation: 5,

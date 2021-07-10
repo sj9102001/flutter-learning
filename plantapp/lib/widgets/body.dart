@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantapp/widgets/featured_plant.dart';
 
 import '../widgets/title_with_more_button.dart';
 import '../widgets/header_with_search_box.dart';
@@ -14,7 +15,9 @@ class Body extends StatelessWidget {
         children: <Widget>[
           HeaderWithSearchBox(),
           TitleWithMoreButton(text: 'More', press: () {}),
-          RecommendedPlants()
+          RecommendedPlants(),
+          TitleWithMoreButton(text: 'Featured Plants', press: () {}),
+          FeaturedPlant()
         ],
       ),
     );
