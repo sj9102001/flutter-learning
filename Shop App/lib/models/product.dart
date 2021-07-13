@@ -20,7 +20,7 @@ class Product with ChangeNotifier {
       @required this.imageUrl,
       this.isFavourite = false});
 
-  Future<bool> toggleFavouriteStatus() async {
+  Future<void> toggleFavouriteStatus() async {
     var url = Uri.parse(
         'https://learnflutter-38f47-default-rtdb.firebaseio.com/products/$id.json');
     final oldStatus = isFavourite;
