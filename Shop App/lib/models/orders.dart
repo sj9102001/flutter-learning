@@ -59,6 +59,7 @@ class Orders with ChangeNotifier {
     var url = Uri.parse(
         'https://learnflutter-38f47-default-rtdb.firebaseio.com/orders.json');
     final response = await http.get(url);
+    print(response.statusCode);
     // print(response.body);
     final List<OrderItem> loadedOrders = [];
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
