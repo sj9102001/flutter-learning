@@ -7,8 +7,9 @@ import '../models/http_exception.dart';
 
 class Products with ChangeNotifier {
   final String authToken;
+  final String userId;
 
-  Products(this.authToken, this._items);
+  Products(this.authToken, this.userId, this._items);
 
   List<Product> _items = [];
 
@@ -32,6 +33,10 @@ class Products with ChangeNotifier {
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      url = Uri.parse(
+          'https://learnflutter-38f47-default-rtdb.firebaseio.com/userFavourites/$userId.json?auth=$authToken');
+      final favouriteResponse = await http.get(url);
+      final favouriteData = json.decode(favouriteResponse.body);
       final List<Product> loadedProduct = [];
       extractedData.forEach((prodId, prodData) {
         loadedProduct.add(
@@ -39,8 +44,10 @@ class Products with ChangeNotifier {
             id: prodId,
             title: prodData['title'],
             description: prodData['description'],
+            isFavourite: favouriteData == null
+                ? false
+                : favouriteData[prodId]['isFavourite'] ?? false,
             price: prodData['price'],
-            isFavourite: prodData['isFavourite'],
             imageUrl: prodData['imageUrl'],
           ),
         );
