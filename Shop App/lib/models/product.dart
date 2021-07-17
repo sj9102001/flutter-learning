@@ -20,30 +20,30 @@ class Product with ChangeNotifier {
       @required this.imageUrl,
       this.isFavourite = false});
 
+  void _setFavValue(bool newValue) {
+    isFavourite = newValue;
+    notifyListeners();
+  }
+
   Future<void> toggleFavouriteStatus(String token, String userId) async {
-    var url = Uri.parse(
-        'https://learnflutter-38f47-default-rtdb.firebaseio.com/userFavourites/$userId/$id.json?auth=$token');
     final oldStatus = isFavourite;
     isFavourite = !isFavourite;
     notifyListeners();
+
+    var url = Uri.parse(
+        'https://learnflutter-38f47-default-rtdb.firebaseio.com/userFavourites/$userId/$id.json?auth=$token');
     try {
-      final response = await http.patch(
+      final response = await http.put(
         url,
         body: json.encode(
-          {
-            'isFavourite': isFavourite,
-          },
+          isFavourite,
         ),
       );
-      print(response.statusCode);
       if (response.statusCode >= 400) {
-        isFavourite = oldStatus;
-        notifyListeners();
-        throw HttpException('Error');
+        _setFavValue(oldStatus);
       }
     } catch (error) {
-      isFavourite = oldStatus;
-      notifyListeners();
+      _setFavValue(oldStatus);
     }
   }
 }

@@ -27,43 +27,6 @@ class Products with ChangeNotifier {
     return _items.firstWhere((element) => element.id == id);
   }
 
-  Future<void> fetchAndSetProducts() async {
-    var url = Uri.parse(
-        'https://learnflutter-38f47-default-rtdb.firebaseio.com/products.json?auth=$authToken');
-    try {
-      final response = await http.get(url);
-      final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      url = Uri.parse(
-          'https://learnflutter-38f47-default-rtdb.firebaseio.com/userFavourites/$userId.json?auth=$authToken');
-      final favouriteResponse = await http.get(url);
-      final favouriteData =
-          json.decode(favouriteResponse.body) as Map<String, dynamic>;
-      print(favouriteData);
-      final List<Product> loadedProduct = [];
-      extractedData.forEach((prodId, prodData) {
-        print(favouriteData[prodId]['isFavourite']);
-        loadedProduct.add(
-          Product(
-            id: prodId,
-            title: prodData['title'],
-            description: prodData['description'],
-            isFavourite: favouriteData == null
-                ? false
-                : (favouriteData[prodId]['isFavourite'] == null
-                    ? false
-                    : favouriteData[prodId]['isFavourite']),
-            price: prodData['price'],
-            imageUrl: prodData['imageUrl'],
-          ),
-        );
-      });
-      _items = loadedProduct;
-      notifyListeners();
-    } catch (error) {
-      throw error;
-    }
-  }
-
   Future<void> addProduct(Product product) async {
     //it will return a future, which we want in listeners to make use of .then() to show a loading indicator
     var url = Uri.parse(
@@ -77,6 +40,7 @@ class Products with ChangeNotifier {
             'description': product.description,
             'imageUrl': product.imageUrl,
             'price': product.price,
+            'creatorId': userId,
           },
         ),
       );
@@ -95,6 +59,45 @@ class Products with ChangeNotifier {
     }
 
     // throw error;
+  }
+
+  Future<void> fetchAndSetProducts() async {
+    var url = Uri.parse(
+        'https://learnflutter-38f47-default-rtdb.firebaseio.com/products.json?auth=$authToken&orderBy="creatorId"&equalTo="$userId"');
+    try {
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      url = Uri.parse(
+          'https://learnflutter-38f47-default-rtdb.firebaseio.com/userFavourites/$userId.json?auth=$authToken');
+      final favouriteResponse = await http.get(url);
+      final favouriteData =
+          json.decode(favouriteResponse.body) as Map<String, dynamic>;
+      print(favouriteData);
+      final List<Product> loadedProduct = [];
+      extractedData.forEach((prodId, prodData) {
+        if (favouriteData != null) {
+          print("favouriteData[prodId] : ${favouriteData[prodId]}");
+        }
+        loadedProduct.add(
+          Product(
+            id: prodId,
+            title: prodData['title'],
+            description: prodData['description'],
+            isFavourite: favouriteData == null
+                ? false
+                : favouriteData[prodId] == null
+                    ? false
+                    : favouriteData[prodId],
+            price: prodData['price'],
+            imageUrl: prodData['imageUrl'],
+          ),
+        );
+      });
+      _items = loadedProduct;
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
   }
 
   Future<void> updateProduct(String id, Product newProduct) async {
