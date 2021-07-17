@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../models/auth.dart';
 import '../screens/orders_screen.dart';
 import '../screens/user_products_screen.dart';
 
@@ -35,6 +37,16 @@ class AppDrawer extends StatelessWidget {
             title: Text('User Products'),
             onTap: () {
               Navigator.of(context).pushNamed(UserProductsScreen.routeName);
+            },
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Logout'),
+            onTap: () {
+              Navigator.of(context)
+                  .pop(); //to close the drawer, which on not doing, causes a hard shift of widget and error
+              Provider.of<Auth>(context, listen: false).logout();
             },
           ),
         ],
