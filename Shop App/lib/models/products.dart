@@ -61,9 +61,11 @@ class Products with ChangeNotifier {
     // throw error;
   }
 
-  Future<void> fetchAndSetProducts() async {
+  Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
+    final filterString =
+        filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
     var url = Uri.parse(
-        'https://learnflutter-38f47-default-rtdb.firebaseio.com/products.json?auth=$authToken&orderBy="creatorId"&equalTo="$userId"');
+        'https://learnflutter-38f47-default-rtdb.firebaseio.com/products.json?auth=$authToken&$filterString');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -72,12 +74,8 @@ class Products with ChangeNotifier {
       final favouriteResponse = await http.get(url);
       final favouriteData =
           json.decode(favouriteResponse.body) as Map<String, dynamic>;
-      print(favouriteData);
       final List<Product> loadedProduct = [];
       extractedData.forEach((prodId, prodData) {
-        if (favouriteData != null) {
-          print("favouriteData[prodId] : ${favouriteData[prodId]}");
-        }
         loadedProduct.add(
           Product(
             id: prodId,
