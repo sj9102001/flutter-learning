@@ -46,6 +46,7 @@ class AppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context)
                   .pop(); //to close the drawer, which on not doing, causes a hard shift of widget and error
+              // Navigator.of(context).pushReplacement('/');
               Provider.of<Auth>(context, listen: false).logout();
             },
           ),
