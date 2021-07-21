@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+
+import '../widgets/image_input.dart';
 
 class AddPlaceScreen extends StatefulWidget {
   static const routeName = '/add-place';
@@ -10,6 +14,11 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
   final _formKey = GlobalKey<FormState>();
 
   String enteredTitle = '';
+  var _pickedImage;
+
+  void _selectImage(File pickedImage) {
+    _pickedImage = pickedImage;
+  }
 
   void saveForm() {
     if (!_formKey.currentState!.validate()) {
@@ -54,6 +63,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                     ),
                     //form............
                     SizedBox(height: 10),
+                    ImageInput(_selectImage),
                   ],
                 ),
               ),
