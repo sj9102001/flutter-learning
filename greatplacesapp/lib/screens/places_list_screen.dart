@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../screens/add_place_screen.dart';
+import '../widgets/places_listtile.dart';
 
 class PlacesListScreen extends StatelessWidget {
   @override
@@ -17,9 +18,7 @@ class PlacesListScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
+      body: PlacesListTile(),
     );
   }
 }
