@@ -1,7 +1,5 @@
 import 'dart:io'; //to work with files
 
-import 'package:flutter/foundation.dart';
-
 class PlaceLocation {
   double latitude;
   double longitude;
