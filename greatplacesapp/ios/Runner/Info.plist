@@ -26,6 +26,10 @@
 	<string>Permission to use camera required</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Permission to use camera required</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Need to get your location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Need to get your location</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
