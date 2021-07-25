@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:plantapp/constant.dart';
+import '../../constant.dart';
 
 class RecommendedPlantCard extends StatelessWidget {
   final String image, title, country;
@@ -25,6 +25,7 @@ class RecommendedPlantCard extends StatelessWidget {
       ),
       width: size.width * 0.35,
       child: GestureDetector(
+        onTap: () => press(),
         child: Card(
           elevation: 5,
           child: Column(

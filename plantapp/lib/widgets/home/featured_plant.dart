@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:plantapp/constant.dart';
+import '../../constant.dart';
 
 class FeaturedPlant extends StatelessWidget {
   const FeaturedPlant({

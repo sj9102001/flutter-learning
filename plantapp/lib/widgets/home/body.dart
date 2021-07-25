@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:plantapp/widgets/featured_plant.dart';
 
-import '../widgets/title_with_more_button.dart';
-import '../widgets/header_with_search_box.dart';
-import '../widgets/recommended_plants.dart';
+import '/widgets/home/featured_plant.dart';
+import '/widgets/home/header_with_search_box.dart';
+import '/widgets/home/recommended_plants.dart';
+import '/widgets/home/title_with_more_button.dart';
 
 class Body extends StatelessWidget {
   @override

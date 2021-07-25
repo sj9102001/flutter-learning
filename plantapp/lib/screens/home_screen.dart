@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../widgets/my_bottom_nav_bar.dart';
-import '../widgets/body.dart';
+import '../widgets/home/body.dart';
+import '../widgets/home/my_bottom_nav_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

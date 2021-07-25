@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/constant.dart';
+import 'package:plantapp/screens/details_screen.dart';
 
 import './screens/home_screen.dart';
 
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: HomeScreen(),
+      routes: {
+        DetailScreen.routeName: (ctx) => DetailScreen(),
+      },
     );
   }
 }

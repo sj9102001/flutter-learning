@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../constant.dart';
-import '../widgets/title_with_custom_underline.dart';
+import '../home/title_with_custom_underline.dart';
+
+import '../../constant.dart';
 
 class TitleWithMoreButton extends StatelessWidget {
   final String text;
@@ -17,12 +18,20 @@ class TitleWithMoreButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           TitleWithCustomUnderline(text),
-          FlatButton(
+          TextButton(
             onPressed: () => press,
-            color: kPrimaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(kPrimaryColor),
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                )),
+            // color: kPrimaryColor,
+            // shape: RoundedRectangleBorder(
+            //   borderRadius: BorderRadius.circular(20),
+            // ),
             child: Text(
               'More',
               style: TextStyle(color: Colors.white),
